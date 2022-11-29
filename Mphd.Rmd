@@ -1,0 +1,487 @@
+---
+title: |
+  | Why Indians embark on PhD programme?
+author: |
+  | Shankar Mepparambath
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document:
+    keep_tex: yes
+    latex_engine: pdflatex
+    fig_caption: yes
+    highlight: haddock
+    number_sections: yes
+    toc: yes
+    toc_depth: 2
+    citation_package: natbib
+  word_document:
+    toc: yes
+    toc_depth: '2'
+
+subtitle: |
+  | Submitted to : Prof. Jandhyala Tilak
+geometry: left=2.5cm,right=2.5cm,top=2cm,bottom=2cm
+fontfamily: mathpazo
+header-includes:
+- \usepackage{draftwatermark}
+- \usepackage{graphicx}
+- \usepackage{float}
+- \usepackage{amsmath}
+- \usepackage{setspace}\onehalfspacing
+indent: yes
+link-citations: yes
+linkcolor: blue
+csl: apa-5th-edition.csl
+bibliography: mph.bib
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning = FALSE)
+library(foreign)
+library(rmarkdown)
+library(psych)
+library("sandwich")
+library(ggplot2)
+library(knitr)
+library(tidyverse)
+library(citation)
+library(readxl)
+library(knitr)
+library(stargazer)
+library(equatiomatic)
+library(randomcoloR)
+suppressMessages(library(dplyr, warn.conflict = FALSE, quietly = TRUE))
+setwd("/Users/apple/Desktop/KSPP/Sem IV/EDU/")
+ed = read.csv("edu_122.csv")
+tb = table(ed$PHD_Track)
+
+```
+
+**Abstract**
+
+The article examines the motivation for pursuing PhD programmes in Indian universities and Institutes. The study evaluated the relationship among various constructs: intrinsic and extrinsic motivation, skill obtained and self-efficacy. 132 sample is collected, and data analysis is attempted using the mediator approach through regression analysis. The study outcome showed that self-efficacy is pivotal in linking motivation and skills obtained in the PhD programme. Preference for Intrinsic and Extrinsic motivation differs from the demographic profile of the respondents. The study showed most of the PhDs from part time and number of PhDs from central universities is less when compared with private and state universities.  The study also highlighted limitations regarding sample size and methodological approach.  
+\par \textbf{Keywords:} Motivation, Self-efficacy, Skill, Mediator analysis
+
+\newpage
+\SetWatermarkText{DRAFT}
+
+> “Live as if you were to die tomorrow. Learn as if you were to live forever.” 
+
+>   ―- Mahatma Gandhi
+
+
+
+# Introduction
+Education is not only a means but also an end. In India, for the past two decades, higher education has witnessed rapid growth in quantity and quality across the states. From 2013 to 2016, India produced around 22000 to 26000 PhD researchers. Predominantly the top 50 institutions produced one-third of PhD in the country. STEM (Science, technology, engineering and mathematics) almost constitutes 50 per cent of PhD in India.  
+
+AISHE 2019 report showed that in the last five years, the number of PhDs increased by 60 per cent in India. Central universities accounted for only 13.6% of total enrollment for PhDs, and only 2.7% of institutes offered PhDs programmes in India @banchariya_aishe_2021. As per an OECD report, India ranked fourth in the number of PhDs awarded in 2014. Among the Indian states, Tamil Nadu produced the highest PhDs holders for the academic year of 2015-16, is 3,973 PhDs (16.44%), followed by Uttar Pradesh and Karnataka, number of PhDs were 2,205 and 1,945 respectively @MM. 
+
+```{r,fig.cap="Number of PhDs across streams",out.width="80%",fig.align='center'}
+knitr::include_graphics("stream.png")
+```
+
+```{r,fig.cap="Number of PhDs Enrolment vs Awarded",out.width="80%",fig.align='center'}
+knitr::include_graphics("en_aw.png")
+```
+
+According to the ASHE report, fig 1 shows many PhDs in India across various streams, which include STEM, Social Sciences, Humanities and Others. PhDs in Biological sciences and Social sciences are dominated in numbers. Humanities need to catch up with other streams.
+fig 2, showed the difference between PhDs enrolled and awarded from 2011-12 to 2017-18. Year on year, the gap is widened. Increase the number of enrolled increased when compared to awarded. The gap is not good news for higher education. However, the study needs to reduce the gap across all the streams. 
+
+\newpage
+
+  On an individual level, not only academic members even people from Industry showed interest in pursuing PhDs programmes. The current research explores the factors for the individual to pursue PhDs in India. Four decades before, people had only the choice of doing full-time PhDs, but many universities admitted part-time PhDs, which is one of the reasons for the individual from both academics and non-academics to enrol on the research programme. UGC regulations 2022 (Minimum Standards and Procedure for Award of PhD Degree),  allowing people from corporate to pursue the PhD programme @part. Apart from government regulations and reforms in higher education made people pursue research programmes, Individual motivation and self-efficacy played a vital role in completing the research programme successfully @matheka_kenyan_2020. Further, in the next section,  the paper discusses the role of motivation, self-efficacy, and skills obtained to complete the PhDs on track.
+  
+# Review of literature
+
+Though there are many reasons for an individual to pursue their higher education, economics plays a vital role. Education is considered a precursor of individual earnings in the current scenario. With the support of Human Capital (HC) theory, the role of education, training and other forms of learning are instrumental for a future payoff for an individual. @deming2022four highlighted one of the stylized facts of Becker about HC is,  
+
+> "Human capital investments have high economic returns throughout childhood and young adulthood."
+
+From the literature and common parlance understanding, the researcher realized that economics is the extrinsic motivation to pursue education at all levels of the educational system. Besides extrinsic, another type of motivation is intrinsic. The following section deals with different types of motivation from the self-determination theory paradigm. 
+
+  The quantity of PhD bolstered in the recent past. However, educationist comes up with criticism against the quality of PhDs India have been produced over the period. @shukla_india_2022 highlighted the poor quality of PhDs produced in India, and UGC echoes the same view. Many people argue that though the number of PhD is increased quality of PhDs is deteriorated drastically. 
+
+## Self-Determination Theory
+
+While compared to other Higher education degrees, a PhD is self-regulated and loosely structured,  the completion of the course highly dependent on scholars' persistence and endeavour. @sver discussed various social and structural reasons for attrition in PhD programmes worldwide in her study. Student motivation is a critical detriment factor in completing the doctoral programme successfully. @deci2012motivation Self-determination theory  (SDT) interplay between psychological growth and social context satisfies individual basic psychological needs such as autonomy, competence, and relatedness. In the context of doctoral education, an individual researcher should possess all three dimensions when they interact with their supervisor and other stakeholders in the university system. Many studies revealed that scholars who completed their PhD programme demonstrated more autonomy, competence and relatedness in their academic ecosystem than those who could not complete their programme. The core of SDT is fostering autonomous (intrinsic motivation) or self-regulation, which indicates that one's behaviour is the product of one's own volition. According to SDT theory, the other motivation is more external and controlled by external regulations. Between these two motivations, three mid-ranged motivations lean towards external motivation: integrated, identified, and introjected. These three motivations are less autonomous than Intrinsic. Deci also comes out with Amotivation for people who are not aware of what they intend and not clear about their goals. @litalien_motivation_2015 study came out with a scale to measure researchers' motivation to do PhD using SDT theory, and they named it as MPhD scale exclusively to measure the motivation of PhDs. The scale is undergone rigour and various reliability and validity test.
+   @moreno_2013 study showed that extrinsic motivation is a critical driver in a structured PhD programme, while traditional European doctoral programme is driven by intrinsic motivation in computer science. @embark Russian study comes out with a typology of motives for doctoral Study in Russia, using a mixed research methodology. Key intrinsic motivation is interest in research, teaching, and learning and extrinsic motivation such as career success, professional expertise, and public recognition. The study also reported Amotivation among the students. 
+SDT alone cannot allow the scholars to complete their PhD successfully; in addition to the SDT framework, constructs like self-efficacy and skills obtained make much difference between those who completed or did not complete PhDs programmes across various universities. 
+    
+## Self Efficacy
+
+Many studies suggest self-efficacy as an antecedent of academic performance. It is one confidence to complete the performing task successfully. Doctoral studies established the correlation between self-efficacy and types of motivation, both intrinsically and extrinsically. Based on relations among the constructs from prior literature, it is better to test self-efficacy as a mediator between types of motivation and successful completion of doctoral study. Much educational psychology and organizational studies used self-efficacy as a mediator in their studies. 
+@yu2015effect study examined the theoretical model using self-efficacy to mediate between perceived stress and job burnout among 387 middle school teachers in China. In another study, @prussia1998self used the structural equation model to confirm the role
+of self-efficacy as the mediator between self-leadership skills and performance. Interestingly, some studies used self-efficacy as antecedents and motivation as the mediator in their tested model. @thomas2009self conducted a study among 111 African American women in college; they tested mediator analysis using the Sobel approach and used both intrinsic and extrinsic motivation as the mediator between self-efficacy and 
+Academic Adjustments. The prior literature shows that self-efficacy is the right candidate for both independent and mediator variables in the theoretical models.
+
+## Skill Obtained through PhD Programme
+
+Among the intrinsic motivators, learning various skills to do research is the key motive to pursuing a PhD. Besides a degree, possessing relevant skills keep the researcher ahead of time. @horta2018phd found that perceived skills and career plans are associated among PhD students. In the same Study, STEM students prefer more non-academic careers than non-STEM students. @platow2012phd listed many skills obtained by the scholars during their PhD programmes, such as creativity, analytical, problem-solving, data analysis, grant writing, leadership skills, writing reports and article, project management, teaching skills and methodological skills etc.
+
+## Research Gap
+
+@flick2018introduction in his book emphasized the role of research questions is essential; formulating the research question is considered various paradigms, theory, methodology and entire projects. Spotting the gap in research through problematization and challenging the assumptions on theory build is a pivotal part of research @alvesson2011generating. The gap spotting includes extending the theory by introducing a new mediator or moderator variable in the theoretical model, sometimes even a data generating mechanism which is more novel, like unstructured data, than the traditional one and also a blend of various statistical techniques like psychometrics and econometrics etc. To the researcher's knowledge, in the Indian context,previous literature on doctoral Studies did not attempt to test the theoretical model of how self-efficacy can translate the motivation into skill obtained in the  PhD process. Empirical testing on the given hypothesis and theoretical model contributes to the existing doctoral study. 
+
+
+# Research Methodology
+
+## Research Question
+
+  - RQ1. What type of motivation (intrinsic or extrinsic) is highly perceived by higher education students in India?
+  
+  - RQ2. Does self-efficacy mediate between the respondents' motivation and skills obtained during the PhD programmes?
+  
+  - RQ3. Do respondents' demographic backgrounds such as gender, institution type and programme type play a role in the perception of motivation, skills obtained and self-efficacy of the higher education students?
+  
+## Objective and Study Hypotheses
+  
+  The study has the following objective.
+
+- To know what type of motivation is prevailing among the PhD holders or persuaders
+
+- To assess the relationship between the type of motivation and skills obtained during the  PhD programme
+
+- To evaluate the role of self-efficacy as the mediator between motivation and skills obtained
+
+The research hypotheses are as follows:
+  
+- H1: Self-efficacy is the mediator between the type of Intrinsic motivation and skills obtained during the PhD programme.
+
+- H2: Self-efficacy enacts as the mediator between the type of Extrinsic motivation  and skills obtained during the PhD programme
+
+- H3: Study constructs were perceived differently by the respondents based on their background of demographics and PhD mode
+
+
+## Design and Method
+
+  The methodology is critical to systematically approaching the research problem. The study followed a quantitative research approach based on the psychometrics analytics framework. The study used the post-positivism paradigm, where subjective measures are converted into objectives using the scale @perry1999realism.   A survey research design is followed when generalizing the study outcome to the population based on selected samples. A structured Questionnaire is used to collect the data from respondents who are part of academics and non-academics doing or completed their PhD programme from any University. An individual who completed or pursuing PhD programme in any university in India is considered the unit of analysis. Non Probability sample design is used, where data is collected online through a convenience sample method. The collected data is cleaned and prepared for data analysis. The above-said hypothesis is tested using mediator analysis suggested by mediator analysis literature @hayes2009beyond and @rucker2011mediation.
+
+## Measures used in the study
+
+The study used three measures to operationalize the constructs such as motivation, self-efficacy and successful completion of PhD.  Motivation is measured using combining of two scales 1—MPhD scale developed by @litalien_motivation_2015a and items or statements borrowed from @pintrich2003motivational. Self-efficacy is measured using the scale of @chen2001validation. PhD successful completion is measured through customized five items. All the items are measured on 5 point rating scale. The selected scale showed a good level of Cronbach alpha for their respective scales. 
+
+# Data Analysis
+
+This section dealt with data analysis based on the study objective and collected data. It showed the sample composition of the respondents to understand the demographic profile of the respondents. Descriptive statistics are used to show the distribution of data through mean, min, max and standard deviation.   Cronbach's alpha is used to assess the reliability of the scale used in the study.   To further test the study hypothesis, mediator analysis is used. The output is represented in tables, charts and diagrams.   Quantitative analysis is done using R software. Regression is reported using the stargazer package @hlavac_stargazer_2018 and @maiti_getting_2021. DiagrammR package is used to draw the mediator diagram @iannone_diagrammer_2022.  
+
+
+\newpage
+
+## Sample composition N = `r nrow(ed)`
+
+```{r}
+count1<- apply(ed[,c(1:6,8)],2,function(x)table(x))
+percentage1<- apply(ed[,c(1:6,8)],2,function(x)(prop.table(table(x))*100))
+freq1<- data.frame(unlist(count1),unlist(percentage1))
+kable(freq1,caption = "Demographic Distribution",col.names = c("count","percentage"),digits = 2)
+
+```
+
+The above table shows the sample composition of the collected sample. Out of 132 samples, 58% are female, 40% belong to the age category of 30 to 40 years, 76% of respondents associated with Academics, 65% are part of management science streams, 72% pursued or doing PhD through part-time mode, 48% respondents already completed their PhD. 46% of people doing or completed their PhDs through State universities.
+
+```{r}
+
+ed$PHD_Track [ed$PHD_Track == "On Track"] = 5
+ed$PHD_Track [ed$PHD_Track == "Delayed 1 yr"] = 4
+ed$PHD_Track [ed$PHD_Track == "Delayed 2 yrs"] = 3
+ed$PHD_Track [ed$PHD_Track == "Delayed 3 yrs"] = 2
+ed$PHD_Track [ed$PHD_Track == "Delayed >3 yrs"] = 1
+ed$PHD_Track = as.numeric(ed$PHD_Track)
+```
+
+## Reliability Test and Descriptive Analysis
+
+The whole study captured the data through the psychometrics approach using the Questionnaire method. Measurement error and social desirability bias are inevitable through this method. However, the researcher tested the study constructs reliability through Cronbach's alpha. The table below shows the alpha, higher than .7, which met the threshold value @nunnally1994psychometric. The mean of constructs showed more than 3 out of 5 point scale except for Introjected dimensions. Intrinsic motivation is 4.07, Self-efficacy is 3.6, and skill is 3.8. The agreement among the respondents for these dimensions is above average.
+
+```{r, fig.align="Reliability and Descriptive statistics"}
+
+
+knitr::opts_chunk$set(comment = NA)
+ING <- psych::alpha(ed[,c(9:11)])
+IDN <- psych::alpha(ed[,c(12:14)])
+INR <- psych::alpha(ed[,c(15:17)])
+EXT <- psych::alpha(ed[,c(18:22)])
+INT <- psych::alpha(ed[,c(23:25)])
+SE <- psych::alpha(ed[,c(26:33)])
+SK <- psych::alpha(ed[,c(36:47)])
+OU <- psych::alpha(ed[,c(48:52)])
+
+ed$Integrated <- rowMeans(ed[,c(9:11)])
+ed$Identified <- rowMeans(ed[,c(12:14)])
+ed$Introjected <- rowMeans(ed[,c(15:17)])
+ed$External    <- rowMeans(ed[,c(18:22)])
+ed$Intrinsic   <- rowMeans(ed[,c(23:25)])
+ed$Self_efficacy <- rowMeans(ed[,c(26:33)])
+ed$Skill        <- rowMeans(ed[,c(36:47)])
+ed$Outcome      <- rowMeans(ed[,c(48:52)])
+
+alphascore <- data.frame(rbind(ING$total,IDN$total,INR$total,EXT$total,INT$total,SE$total,SK$total))
+nvar       <- rbind(ING$nvar,IDN$nvar,INR$nvar,EXT$nvar,INT$nvar,SE$nvar,SK$nvar)
+
+var_name<- names(ed[,54:60])
+finalalpha<-round(alphascore[,c(1,7,8)],3)
+rownames(finalalpha) <- 1:7
+cronbache<-data.frame(cbind(var_name,finalalpha,nvar))
+colnames(cronbache) <- c("Constructs Name","Cronbach Alpha","Mean","Std","No of items")
+kable(cronbache,caption = "Reliability test and Descripitives")
+```
+
+## Correlation matrix
+
+The correlation matrix showed the correlation coefficient among all the constructs, ranging from .06 to .60. Most of the relationship is moderately positively related.
+
+```{r}
+knitr::opts_chunk$set(comment = NA)
+options(digits = 2)
+reg_data = ed[,c(1:8,54:60,48)]
+rs = cor(reg_data[,c(9:15)])
+colnames(rs) = 1:7
+rownames(rs) = c("1 Integrated","2 Identified","3 Introjected","4 External","5 Intrinsic","6 Self_efficacy","7 Skill")
+knitr::opts_chunk$set(comment = NA)
+stargazer(rs,type = "text", title="Table Correlation analysis")
+
+```
+\newpage
+
+## Mediator Analysis 1 - Intrinsic --> Self Efficacy --> Skill
+
+The mediator analysis test is attempted through a set of linear regressions. It is examined how self-efficacy translates intrinsic motivation into skills among the PhDs; The output is shown below. Four equations showed the beta values of predictors and their relationship. 
+
+```{r}
+library("rmarkdown")
+library("tinytex")
+library("stargazer")
+reg_data$EXT_MOT = rowMeans(reg_data[,9:12])
+m1 = lm(Skill ~ Intrinsic,data=reg_data)
+m2 = lm(Self_efficacy ~ Intrinsic,data=reg_data)
+m3 = lm(Skill ~ Self_efficacy,data=reg_data)
+m4 = lm(Skill ~ Intrinsic+Self_efficacy,data=reg_data)
+model.lst = list(m1,m2,m3,m4)
+stargazer(m1,
+          m2,
+          m3,
+          m4,
+         title="Displaying results for mediator analysis 1",
+          type = "text",
+          float = TRUE,
+          report = "vcs*",
+          se=lapply(model.lst, function(x) sqrt(diag(vcovHC(x, type = "HC1")))),
+          no.space = TRUE,
+          header=FALSE,
+          single.row = TRUE,
+          font.size = "small",
+          intercept.bottom = F,
+          column.separate = c(1, 1),
+          digits = 2,
+          t.auto = F,
+          p.auto = F,
+          notes.align = "l",
+          notes = c("datasets::reg_Data", "lm() function with Robust SE"),
+          notes.append = TRUE
+          )
+
+```
+
+`r extract_eq(m1,wrap = TRUE, use_coefs = TRUE,terms_per_line = 3)`
+eqn 1 is a total effect, Intrinsic motivation leads to Skill, denoted by path "c", beta is .29, and it is significant.
+`r extract_eq(m2,wrap = TRUE, use_coefs = TRUE,terms_per_line = 3)`
+eqn 2 is path a, which showed the relationship between Intrinsic and Self-efficacy, beta is .59, and it is significant. 
+`r extract_eq(m3,wrap = TRUE, use_coefs = TRUE,terms_per_line = 3)`
+eqn 3 is path b, which showed the relationship between Self-efficacy and Skill, beta is .37 and significant.
+the indirect effect is the product of path a and b beta, which is .22 (.59*.37)
+`r extract_eq(m4,wrap = TRUE, use_coefs = TRUE,terms_per_line = 3)`
+eqn 4 is regressing both the independent and mediator variable with the outcome variable, the beta of Intrinsic is reduced to .10 from .29 of eqn 1, and it is not significant. It showed that the role of self-efficacy weakened the relationship between Intrinsic and Skill. The direct effect is the total effect minus indirect effect, which is .07 The contribution of the indirect effect is 76%, which is the indirect effect divided by the total effect (.22/.29), and the direct effect is 24%.(.07/.29).
+
+```{r,fig.cap= "Mediator model 1", echo=FALSE, out.width="100%"}
+knitr::include_graphics("INT.png")
+```
+
+## Mediator Analysis 2 - Extrinsic --> Self Efficacy --> Skill
+
+```{r }
+library("rmarkdown")
+library("tinytex")
+library("stargazer")
+m5 = lm(Skill ~ EXT_MOT,data=reg_data)
+m6 = lm(Self_efficacy ~ EXT_MOT,data=reg_data)
+m7 = lm(Skill ~ Self_efficacy,data=reg_data)
+m8 = lm(Skill ~ EXT_MOT+Self_efficacy,data=reg_data)
+model.lst = list(m5,m6,m7,m8)
+stargazer(m5,
+          m6,
+          m7,
+          m8,
+          title="Displaying results for multiple response variables",
+          type = "text",
+          float = TRUE,
+          report = "vcs*",
+          se=lapply(model.lst, function(x) sqrt(diag(vcovHC(x, type = "HC1")))),
+          no.space = TRUE,
+          header=FALSE,
+          single.row = TRUE,
+          font.size = "small",
+          intercept.bottom = F,
+          column.separate = c(1, 1),
+          digits = 2,
+          t.auto = F,
+          p.auto = F,
+          notes.align = "l",
+          notes = c("datasets::reg_Data", "lm() function with Robust SE"),
+          notes.append = TRUE
+          )
+```
+
+`r extract_eq(m5,wrap = TRUE, use_coefs = TRUE,terms_per_line = 3)`
+eqn 5 is a total effect, Extrinsic motivation leads to Skill, denoted by path "c", beta is .35, and it is significant.
+`r extract_eq(m6,wrap = TRUE, use_coefs = TRUE,terms_per_line = 3)`
+eqn 6 is path a, which showed the relationship between Extrinsic and Self-efficacy, beta is .85, and it is significant. 
+`r extract_eq(m7,wrap = TRUE, use_coefs = TRUE,terms_per_line = 3)`
+eqn 7 is path b, which showed the relationship between Self-efficacy and Skill, beta is .37 and significant.
+
+`r extract_eq(m8,wrap = TRUE, use_coefs = TRUE,terms_per_line = 3)`
+
+from the eqn 8, beta of Extrinisc is .05, not significant. the indirect effect is .31 (.85*.37), and the direct effect is total effect minus indirect effect, which is .04. Indirect effect contribution is 89%, and direct effect contribution is 11%. Again, it clearly showed that self-efficacy played a vital role in translating motivation to acquire the Skill among the PhDs in India. 
+
+```{r,echo=FALSE,fig.cap="mediator model 2", out.width="100%"}
+knitr::include_graphics("EXT.png")
+```
+
+## Testing of significant difference
+
+On Hypotheses 3, the study used a t-test and one-way ANOVA to establish the significant difference in the mean score of the study constructs (intrinsic, extrinsic, self-efficacy and skill) based on demographics and PhD process variables. Refer to Annexure, Output is not discussed in detail, but through charts, it showed which is statistically significant at 5% and 10%. Grey colour indicated no significant difference, orange indicated 5% significant and green indicated 10% significance. 
+
+
+# Findings and Suggestions
+
+Based on the two motivations set of the equation, it is understood that motivation does not directly contribute to skill; however, when Self-efficacy was enacted as a mediator between motivation and skill, both motivations turned out to be significant with skill. The mediator analysis proved that intrinsic motivation contributed 11% to the path, while extrinsic motivation contributed only 1%. Results showed that skills in the PhD programme were acquired more through intrinsic than extrinsic motivation. Hypotheses 1 and 2, proved the role of self-efficacy as the mediator between types of motivation and skill. Sixty per cent of the respondents are on track to PhD progress, and the rest is delayed by one to more than three years. 
+
+On Hypotheses 3, the result most of are not significant. On Intrinsic motivation, females exhibited higher than males, and the STEM stream was perceived as higher than other streams. On Extrinsic motivation, respondents in the 30 to 40 category showed more than the rest. On skill obtained, less than 30 years were perceived more than other categories and Institute of excellence was perceived more than other university categories. On the PhD Track, on-track respondents exhibited higher mean scores than those delayed in progress on intrinsic and self-efficacy. Both motivations are not significant directly to the skill, and it needs Self-efficacy to play a mediator role. However, intrinsic motivation slightly got a higher beta than the extrinsic beta value on skill. 
+
+## Suggestions and limitations
+
+Based on the primary and secondary data analysis, the study suggests that the role of self-efficacy is essential to convert motivation into actionable skill acquiring and helps complete the PhD work on time. Despite, India ranks fourth in producing PhD in the Academic world market. There are two pain points: the quality of PhD and the wide gap between the number of admissions and awards in the PhD programme. Institute of Excellence and Central university is known for quality, but their contribution to the total number of PhDs in the country is very meagre. The ministry of HRD should come out with a policy to over limitations. It should motivate the university to provide a sufficient Ecosystem to promote the researcher's self-efficacy and acquisition of the skills. The study's limitation of sample is restricted to 132, which is insufficient to generalize the result. Most of the sample has been collected from non-STEM streams, though more PhDs are from STEM streams. 
+
+
+## Future scope
+
+The current study can be extended with different dimensions; for instance, Self Determination Theory has a crucial dimension of relatedness, which is essential in the PhD process in the context of interaction between supervisors and scholars. In the Indian context, very few studies are attempted in doctoral studies. Though the current study dealt with general theory and statistical rigour tests; however, more studies should be done comprehensively, such as the structural equation model, which takes care of measurement error. In doctoral studies, longitudinal studies are not attempted, the PhD process is extended from 3 to 5 years, and it is better to capture the constructs over the period than the cross-section like the current study.
+
+\newpage
+
+# Annexure
+<div id="refs"></div>
+
+```{r,fig.cap="PhD on track"}
+
+barplot(tb,las=1,col="orange",ylim = c(0,70),cex.names = .8)
+tb2 = table(ed$Methodology)
+tb3 = table(ed$Method)
+```
+
+```{r,fig.cap="Methodology Prevalent",out.width="75%",fig.align='center'}
+knitr::include_graphics("medly.png")
+```
+
+```{r,fig.cap="Method Prevalent",out.width="75%",fig.align='center'}
+knitr::include_graphics("method.png")
+```
+
+## Descripitve statistics
+
+```{r}
+desc = data.frame(describe(reg_data[,c(9:15,17)]))
+kable(desc[,c(2,3,4,8,9)],caption = "Descripitve statistics")
+```
+
+\newpage
+## Gender distribution (female/male) N = `r table(reg_data$Gender)`
+
+```{r}
+
+par(mfrow=c(2,2))
+barplot(tapply(reg_data$Intrinsic,reg_data$Gender,mean),col = c("orange","grey"),ylim = c(0,5),main = "Intrinisic")
+barplot(tapply(reg_data$EXT_MOT,reg_data$Gender,mean),col = c("grey","grey"),,ylim = c(0,5),main = "Extrinisic")
+barplot(tapply(reg_data$Self_efficacy,reg_data$Gender,mean),col = c("grey","grey"),,ylim = c(0,5),main = "Self_efficacy")
+barplot(tapply(reg_data$Skill,reg_data$Gender,mean),col = c("grey","grey"),,ylim = c(0,5),main = "Skill obtained")
+
+gen = aggregate(. ~ Gender,mean,data= reg_data[,c(13,17,14,15,1)])
+kable(gen,caption = "Construct Mean score by Gender")
+
+```
+
+\newpage
+
+## Mode of Phd distribution (Full Time/Part time) N = `r table(reg_data$Mode)`
+
+```{r}
+par(mfrow=c(2,2))
+barplot(tapply(reg_data$Intrinsic,reg_data$Mode,mean),col = c("grey","grey"),ylim = c(0,5),main = "Intrinisic")
+barplot(tapply(reg_data$EXT_MOT,reg_data$Mode,mean),col = c("grey","grey"),,ylim = c(0,5),main = "Extrinisic")
+barplot(tapply(reg_data$Self_efficacy,reg_data$Mode,mean),col = c("grey","grey"),,ylim = c(0,5),main = "Self_efficacy")
+barplot(tapply(reg_data$Skill,reg_data$Mode,mean),col = c("grey","grey"),,ylim = c(0,5),main = "Skill obtained")
+
+mod = aggregate(. ~ Mode,mean,data= reg_data[,c(13,17,14,15,5)])
+kable(mod,caption = "Construct Mean score by Mode")
+```
+
+\newpage
+## Occupational distribution (Academics/Industry/Others) N = `r table(reg_data$Occupational.Sector)`
+
+```{r}
+
+par(mfrow=c(2,2))
+barplot(tapply(reg_data$Intrinsic,reg_data$Occupational.Sector,mean),col = c("grey","grey","grey"),ylim = c(0,5),main = "Intrinisic")
+barplot(tapply(reg_data$EXT_MOT,reg_data$Occupational.Sector,mean),col = c("grey","grey","grey"),,ylim = c(0,5),main = "Extrinisic")
+barplot(tapply(reg_data$Self_efficacy,reg_data$Occupational.Sector,mean),col = c("grey","grey","grey"),,ylim = c(0,5),main = "Self_efficacy")
+barplot(tapply(reg_data$Skill,reg_data$Occupational.Sector,mean),col = c("grey","grey","grey"),,ylim = c(0,5),main = "Skill obtained")
+
+occ = aggregate(. ~ Occupational.Sector,mean,data= reg_data[,c(13,17,14,15,3)])
+kable(occ,caption = "Construct Mean score by Occupational Sector")
+```
+
+## Age wise distribution (30-40/41-50/Less than 30/More than 50) N = `r table(reg_data$Age)`
+
+```{r}
+
+par(mfrow=c(2,2))
+barplot(tapply(reg_data$Intrinsic,reg_data$Age,mean),col = c("grey","grey","grey","grey"),ylim = c(0,5),main = "Intrinisic",las=2)
+barplot(tapply(reg_data$EXT_MOT,reg_data$Age,mean),col = c("orange","grey","grey","grey"),,ylim = c(0,5),main = "Extrinisic",las=2)
+barplot(tapply(reg_data$Self_efficacy,reg_data$Age,mean),col = c("grey","grey","grey","grey"),,ylim = c(0,5),main = "Self_efficacy",las=2)
+barplot(tapply(reg_data$Skill,reg_data$Age,mean),col = c("grey","grey","grey","grey"),,ylim = c(0,5),main = "Skill obtained",las=2)
+
+age = aggregate(. ~ Age,mean,data= reg_data[,c(13,17,14,15,2)])
+kable(age,caption = "Construct Mean score by Age")
+
+```
+
+## Type Univ. distribution (Central/Inst. Excellence/Pvt Univ/State) N = `r table(reg_data$Type_University)`
+
+```{r}
+
+par(mfrow=c(2,2))
+barplot(tapply(reg_data$Intrinsic,reg_data$Type_University,mean),col = c("grey","grey","grey","grey"),ylim = c(0,5),main = "Intrinisic",las=2)
+barplot(tapply(reg_data$EXT_MOT,reg_data$Type_University,mean),col = c("grey","grey","grey","grey"),,ylim = c(0,5),main = "Extrinisic",las=2)
+barplot(tapply(reg_data$Self_efficacy,reg_data$Type_University,mean),col = c("grey","grey","grey","grey"),,ylim = c(0,5),main = "Self_efficacy",las=2)
+barplot(tapply(reg_data$Skill,reg_data$Type_University,mean),col = c("grey","orange","grey","grey"),,ylim = c(0,5),main = "Skill obtained",las=2)
+
+uni = aggregate(. ~ Type_University,mean,data= reg_data[,c(13,17,14,15,8)])
+kable(uni,caption = "Construct Mean score by Age")
+
+reg_data$Phd_on_Track = ifelse(reg_data$PHD_Track == 5,"On Track","Delayed")
+```
+
+## Streams distribution (Mgmt/Others/Social Science/STEM) N = `r table(reg_data$Streams)` 
+
+```{r}
+
+par(mfrow=c(2,2))
+barplot(tapply(reg_data$Intrinsic,reg_data$Streams,mean),col = c("grey","grey","grey","orange"),ylim = c(0,5),main = "Intrinisic",las=2)
+barplot(tapply(reg_data$EXT_MOT,reg_data$Streams,mean),col = c("grey","grey","grey","grey"),,ylim = c(0,5),main = "Extrinisic",las=2)
+barplot(tapply(reg_data$Self_efficacy,reg_data$Streams,mean),col = c("grey","grey","grey","grey"),,ylim = c(0,5),main = "Self_efficacy",las=2)
+barplot(tapply(reg_data$Skill,reg_data$Streams,mean),col = c("grey","grey","grey","grey"),,ylim = c(0,5),main = "Skill obtained",las=2)
+
+str = aggregate(. ~ Streams,mean,data= reg_data[,c(13,17,14,15,4)])
+kable(str,caption = "Construct Mean score by Streams")
+```
+
+
+
